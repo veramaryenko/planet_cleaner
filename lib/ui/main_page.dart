@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planet_cleaner/services/location_service.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
 class MainPage extends StatefulWidget {
@@ -17,13 +18,26 @@ class _MainPageState extends State<MainPage> {
           children: <Widget>[
             Text('Hi!', style: Theme.of(context).primaryTextTheme.display1),
             Text(
-              'Nice to see you in our Planet Cleaner Army!\nTo clean our Planet I need you to\naccept some agreements.',
+              'Nice to see you in our\nPlanet Cleaner Army!',
               style: Theme.of(context).primaryTextTheme.display2,
               textAlign: TextAlign.center,
-            )
+            ),
+            Text(
+              'To clean our Planet I need you to\naccept some agreements.',
+              style: Theme.of(context).primaryTextTheme.display2,
+              textAlign: TextAlign.center,
+            ),
+            RaisedButton(
+              onPressed: () {
+                LocationService();
+              },
+              child: const Text('OK!', style: TextStyle(fontSize: 20)),
+            ),
           ],
         ),
       ),
     );
   }
 }
+
+
