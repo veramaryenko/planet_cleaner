@@ -43,4 +43,6 @@ class CameraState extends State<CameraWidget> {
         aspectRatio: controller.value.aspectRatio,
         child: CameraPreview(controller));
   }
+
+  requestPermission() {}
 }
