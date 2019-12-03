@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planet_cleaner/services/location_service.dart';
+import 'package:planet_cleaner/ui/action.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
 class MainPage extends StatefulWidget {
@@ -7,7 +8,17 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
+
+
 class _MainPageState extends State<MainPage> {
+
+  void navigateToActionPage() {
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => ActionPage()));
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +40,8 @@ class _MainPageState extends State<MainPage> {
             ),
             RaisedButton(
               onPressed: () {
-                LocationService();
+//                LocationService();
+                  navigateToActionPage();
               },
               child: const Text('OK!', style: TextStyle(fontSize: 20)),
             ),
