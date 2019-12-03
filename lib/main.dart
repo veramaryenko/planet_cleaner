@@ -9,6 +9,9 @@ void main() {
 }
 
 class PlanetCleanerApp extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,14 +34,21 @@ class PlanetCleanerApp extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
+          display4: TextStyle(
+            color: AppColor.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
       debugShowCheckedModeBanner: false,
+
       home: SplashScreen(),
       routes: <String, WidgetBuilder>{
         'InfoScreen': (BuildContext context) => MainPage(),
         'CameraScreen': (BuildContext context) => ActionPage(),
-      },
+      }
     );
+
   }
 }

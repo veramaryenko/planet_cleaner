@@ -21,7 +21,7 @@ packages:
       name: camera
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.6+3"
+    version: "0.5.7"
   charcode:
     dependency: transitive
     description:
@@ -74,6 +74,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  nice_button:
+    dependency: "direct main"
+    description:
+      name: nice_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.7"
   path:
     dependency: transitive
     description:
@@ -94,7 +101,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0+1"
+    version: "3.2.0"
   quiver:
     dependency: transitive
     description:

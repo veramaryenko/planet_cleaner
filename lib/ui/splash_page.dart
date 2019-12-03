@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Text(
                 'Make Planet\nClean and Beautiful',
                 textAlign: TextAlign.center,
-                 ,
+                style: Theme.of(context).primaryTextTheme.display3,
               )
             ],
           ),
