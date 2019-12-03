@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:planet_cleaner/ui/camera/camera.dart';
+import 'package:planet_cleaner/ui/pollution_list.dart';
+import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
 
 class ActionPage extends StatefulWidget {
   ActionPage({Key key}) : super(key: key);
@@ -11,8 +14,8 @@ class ActionPage extends StatefulWidget {
 class ActionPageState extends State<ActionPage> {
   int selectedIndex = 0;
   final widgetOptions = [
-    Text('Pollution List'),
-    Text('Add new pollution'),
+    new TypesOfPollution(),
+    new CameraWidget(),
     Text('Favourites'),
   ];
 
@@ -31,7 +34,7 @@ class ActionPageState extends State<ActionPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.add_a_photo), title: Text('Send a request')),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), title: Text('Favourites')),
+              icon: Icon(Icons.favorite), title: Text('Latest Posts')),
         ],
         currentIndex: selectedIndex,
         fixedColor: Colors.deepPurple,

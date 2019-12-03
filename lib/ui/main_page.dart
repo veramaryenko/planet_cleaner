@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nice_button/nice_button.dart';
-import 'package:planet_cleaner/services/location_service.dart';
 import 'package:planet_cleaner/ui/action.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
@@ -43,7 +42,7 @@ class _MainPageState extends State<MainPage> {
                 textAlign: TextAlign.center,
               ),
               Text(
-                'This app was created for showing the people how big is the problem od pollution nowadays.',
+                'This app was created to show people how big is the problem of pollution nowadays.',
                 style: Theme.of(context).primaryTextTheme.display4,
                 textAlign: TextAlign.center,
               ),
