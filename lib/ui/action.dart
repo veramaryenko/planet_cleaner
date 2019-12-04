@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:planet_cleaner/ui/camera/camera.dart';
-import 'package:planet_cleaner/ui/camera/camera_test.dart';
-import 'package:planet_cleaner/ui/pollution_list.dart';
+import 'package:planet_cleaner/ui/camera/gallery_and_camera.dart';
 import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
-import 'package:planet_cleaner/utils/app_color.dart';
 
 class ActionPage extends StatefulWidget {
   ActionPage({Key key}) : super(key: key);
@@ -14,7 +11,7 @@ class ActionPage extends StatefulWidget {
 }
 
 class ActionPageState extends State<ActionPage> {
-  int selectedIndex = 0;
+  int selectedIndex = 1;
 
   final widgetOptions = [
     new TypesOfPollution(),
@@ -37,7 +34,7 @@ class ActionPageState extends State<ActionPage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.local_drink, color: Colors.lightBlueAccent),
               title: Text(
-                'Types of Pollution',
+                'Types of Pollutans',
               ),
           ),
           BottomNavigationBarItem(

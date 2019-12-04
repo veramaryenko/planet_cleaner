@@ -14,18 +14,20 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
 
   File imageFile;
 
-  _openGallery() async{
+  _openGallery(BuildContext context) async{
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     this.setState((){
       imageFile = picture;
     });
+    Navigator.of(context).pop();
   }
 
-  _openCamera()async{
+  _openCamera(BuildContext context)async{
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
     setState((){
       imageFile = picture;
     });
+    Navigator.of(context).pop();
   }
 
   Future<void> _showChoiceDialog(BuildContext context){
@@ -38,14 +40,14 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
               GestureDetector(
                 child: Text("Gallery"),
                 onTap: (){
-                  _openGallery();
+                  _openGallery(context);
                 } ,
               ),
               Padding(padding: EdgeInsets.all(8.0)),
               GestureDetector(
                 child: Text("Camera"),
                 onTap: (){
-                  _openCamera();
+                  _openCamera(context);
                 } ,
               )
             ],
@@ -53,6 +55,20 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
         ),
       );
     });
+  }
+
+  Widget _decideImageView(){
+    int selectedIndex = 0;
+
+    if(imageFile == null){
+      return
+        Text("Make a photo\nor pick an image",
+          style: Theme.of(context).primaryTextTheme.display3,
+          textAlign: TextAlign.center);
+    }else{
+      return
+      Image.file(imageFile, width: 600, height: 800,);
+    }
   }
 
   @override
@@ -65,9 +81,7 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Text("Make a photo\nor pick an image",
-                  style: Theme.of(context).primaryTextTheme.display3,
-                  textAlign: TextAlign.center),
+              _decideImageView(),
               NiceButton(
                 radius: 30,
                 padding: const EdgeInsets.all(15),
