@@ -8,6 +8,7 @@ import 'package:nice_button/nice_button.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 import 'package:image_picker/image_picker.dart';
 
+
 class CameraTestWidget extends StatefulWidget {
   @override
   _CameraTestWidgetState createState() => _CameraTestWidgetState();
@@ -103,42 +104,42 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
               width: 300,
               height: 200,
             ),
-        Form(
-          key: _formKey,
-          child: ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal: 1.0),
-            children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(
-                  icon: Icon(FontAwesomeIcons.hashtag),
-                  hintText: "Enter hashtags",
-                  labelText: "Hashtags",
-                ),
-                keyboardType: TextInputType.phone,
-              ),
-              SizedBox(height: 40),
-              Row(
+            Form(
+              key: _formKey,
+              child: ListView(
+                shrinkWrap: true,
+                padding: EdgeInsets.symmetric(horizontal: 1.0),
                 children: <Widget>[
-                  DropdownButton<String>(
-                      items: _pollutians.map((String dropDownStringItem ){
-                        return DropdownMenuItem<String>(
-                          value: dropDownStringItem,
-                          child: Text(dropDownStringItem),
-                        );
-                      }).toList(),
-                      onChanged: (String newValueSelected){
-                        setState(() {
-                          this._currentItemSelected = newValueSelected;
-                        });
-                      },
-                    value: _currentItemSelected,
+                  TextFormField(
+                    decoration: InputDecoration(
+                      icon: Icon(FontAwesomeIcons.hashtag),
+                      hintText: "Enter hashtags",
+                      labelText: "Hashtags",
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                  SizedBox(height: 40),
+                  Row(
+                    children: <Widget>[
+                      DropdownButton<String>(
+                        items: _pollutians.map((String dropDownStringItem ){
+                          return DropdownMenuItem<String>(
+                            value: dropDownStringItem,
+                            child: Text(dropDownStringItem),
+                          );
+                        }).toList(),
+                        onChanged: (String newValueSelected){
+                          setState(() {
+                            this._currentItemSelected = newValueSelected;
+                          });
+                        },
+                        value: _currentItemSelected,
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
+            ),
             NiceButton(
               radius: 30,
               width:100 ,
@@ -147,6 +148,17 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
               background: AppColor.white,
               gradientColors: [Colors.lightBlueAccent, Colors.lightGreen],
               onPressed: () {
+                Firestore.instance
+                    .collection('tasks')
+                    .add({
+                  "title": "title",
+                  "description": "description"
+                })
+                    .then((result) => { Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text("Sent!"),
+
+                )) })
+                    .catchError((err) => print(err));;
                 //TODO implement sending to instagram
               },
             ),

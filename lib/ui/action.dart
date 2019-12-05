@@ -32,10 +32,10 @@ class ActionPageState extends State<ActionPage> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-              icon: Icon(Icons.local_drink, color: Colors.lightBlueAccent),
-              title: Text(
-                'Types of Pollutans',
-              ),
+            icon: Icon(Icons.local_drink, color: Colors.lightBlueAccent),
+            title: Text(
+              'Types of Pollutans',
+            ),
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.add_a_photo, color: Colors.lightBlueAccent),
