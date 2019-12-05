@@ -17,7 +17,7 @@ class TypesOfPollutionState extends State<TypesOfPollution> {
         itemBuilder: (BuildContext context, int index) {
           //TODO: add list of pollutions - create list of images/screens
           return Image.network(
-            "https://drive.google.com/drive/folders/1_nkkOQInl5y53dST7KuMW_uh56FvLLvO?usp=sharing",
+            "https://img-aws.ehowcdn.com/600x600p/photos.demandstudios.com/getty/article/184/54/72967776.jpg",
             fit: BoxFit.contain,
           );
         },
