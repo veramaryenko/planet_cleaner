@@ -160,9 +160,11 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
                   "description": "description"
                 })
                     .then((result) => { Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text("Sent!"),
-
-                )) })
+                content: Text("Thank you for sending the request! "),
+                backgroundColor: Colors.lightGreen,
+                duration: Duration(seconds: 5), ),
+                )}
+                )
                     .catchError((err) => print(err));;
                 //TODO implement sending to instagram
               },
@@ -172,7 +174,6 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
       );
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
