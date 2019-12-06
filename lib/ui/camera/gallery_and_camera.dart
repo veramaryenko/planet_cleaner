@@ -81,6 +81,11 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
             Text("Make a photo\nor pick an image",
                 style: Theme.of(context).primaryTextTheme.display3,
                 textAlign: TextAlign.center),
+            Icon(
+              FontAwesomeIcons.child,
+              color: Colors.lightGreenAccent,
+              size: 180,
+            ),
             NiceButton(
               radius: 20,
               padding: const EdgeInsets.all(15),
