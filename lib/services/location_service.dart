@@ -1,8 +1,13 @@
 import 'package:location/location.dart';
 import 'package:planet_cleaner/datamodels/user_location.dart';
 
-class LocationService {
+abstract class ILocationService {
+  Future<UserLocation> getLocation();
+}
+
+class LocationService implements ILocationService {
   LocationService() {
+    location = Location();
     location.requestPermission().then((granted) {
       if (granted) {
         location.onLocationChanged().listen((locationData) {
@@ -14,10 +19,11 @@ class LocationService {
     });
   }
 
-  var location = Location();
+  Location location;
 
   UserLocation _currentLocation;
 
+  @override
   Future<UserLocation> getLocation() async {
     try {
       final userLocation = await location.getLocation();
