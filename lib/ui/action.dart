@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:planet_cleaner/ui/camera/gallery_and_camera.dart';
+import 'package:planet_cleaner/ui/gallery_and_camera.dart';
 import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
 
 @immutable
