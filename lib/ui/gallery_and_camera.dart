@@ -9,16 +9,18 @@ import 'package:nice_button/nice_button.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'widgets/button_planet.dart';
+
 class CameraTestWidget extends StatefulWidget {
   @override
   _CameraTestWidgetState createState() => _CameraTestWidgetState();
 }
 
 class _CameraTestWidgetState extends State<CameraTestWidget> {
+  final TextEditingController hashTagController = TextEditingController();
   File imageFile;
 
   String _currentItemSelected;
-  final TextEditingController hashTagController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final List<String> _pollutions = [
     'air pollution',
@@ -55,7 +57,7 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
     }
   }
 
-  Future<void> _showChoiceDialog(BuildContext context) {
+  Future<void> _showChoiceDialog() {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -93,23 +95,13 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
         padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: Icon(
           FontAwesomeIcons.child,
-          color: Colors.lightGreenAccent,
+          color: AppColor.yellow,
           size: 180,
         ),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: NiceButton(
-          radius: 20,
-          padding: const EdgeInsets.all(15),
-          text: 'Select Image!',
-          background: AppColor.white,
-          gradientColors: [Colors.lightBlueAccent, Colors.lightGreen],
-          onPressed: () {
-            _showChoiceDialog(context);
-          },
-        ),
-      ),
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: ButtonPlanet('Select Image!', _showChoiceDialog)),
     ];
   }
 
@@ -201,14 +193,11 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 5),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: imageFile == null ? makePhotoView() : sendRequestView(),
-          ),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: imageFile == null ? makePhotoView() : sendRequestView(),
         ),
       ),
     );
