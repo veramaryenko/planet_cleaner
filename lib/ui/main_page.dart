@@ -4,14 +4,14 @@ import 'package:planet_cleaner/ui/gallery_and_camera.dart';
 import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
 
 @immutable
-class ActionPage extends StatefulWidget {
-  const ActionPage({Key key}) : super(key: key);
+class MainPageView extends StatefulWidget {
+  const MainPageView({Key key}) : super(key: key);
 
   @override
-  ActionPageState createState() => ActionPageState();
+  MainPageViewState createState() => MainPageViewState();
 }
 
-class ActionPageState extends State<ActionPage> {
+class MainPageViewState extends State<MainPageView> {
   int selectedIndex = 1;
   final widgetOptions = [
     TypesOfPollution(),

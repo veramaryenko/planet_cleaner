@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:planet_cleaner/ui/action.dart';
+import 'package:planet_cleaner/ui/main_page.dart';
 import 'package:planet_cleaner/ui/widgets/button_planet.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
@@ -47,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 'Yes',
                 () => Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (BuildContext context) => const ActionPage(),
+                    builder: (BuildContext context) => const MainPageView(),
                   ),
                 ),
               )

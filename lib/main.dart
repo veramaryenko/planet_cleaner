@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:planet_cleaner/ui/welcome_page.dart';
 import 'package:planet_cleaner/ui/splash_page.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
-import 'package:planet_cleaner/ui/action.dart';
+import 'package:planet_cleaner/ui/main_page.dart';
 
 void main() {
   runApp(PlanetCleanerApp());
@@ -43,7 +43,7 @@ class PlanetCleanerApp extends StatelessWidget {
         home: SplashScreen(),
         routes: <String, WidgetBuilder>{
           'WelcomeUserSceen': (BuildContext context) => WelcomePage(),
-          'CameraScreen': (BuildContext context) => ActionPage(),
+          'CameraScreen': (BuildContext context) => MainPageView(),
         });
   }
 }
