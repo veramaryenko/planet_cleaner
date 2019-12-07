@@ -11,12 +11,12 @@ import 'package:image_picker/image_picker.dart';
 
 import 'widgets/button_planet.dart';
 
-class CameraTestWidget extends StatefulWidget {
+class CameraWidget extends StatefulWidget {
   @override
-  _CameraTestWidgetState createState() => _CameraTestWidgetState();
+  _CameraWidgetState createState() => _CameraWidgetState();
 }
 
-class _CameraTestWidgetState extends State<CameraTestWidget> {
+class _CameraWidgetState extends State<CameraWidget> {
   final TextEditingController hashTagController = TextEditingController();
   File imageFile;
 
@@ -57,8 +57,8 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
     }
   }
 
-  Future<void> _showChoiceDialog() {
-    return showDialog(
+  void _showChoiceDialog() {
+    showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -88,20 +88,20 @@ class _CameraTestWidgetState extends State<CameraTestWidget> {
 
   List<Widget> makePhotoView() {
     return [
-      Text('Make a photo or pick an image',
-          style: Theme.of(context).primaryTextTheme.display3,
-          textAlign: TextAlign.center),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: Icon(
-          FontAwesomeIcons.child,
-          color: AppColor.yellow,
-          size: 180,
-        ),
+        child: Text('Make a photo or pick an image',
+            style: Theme.of(context).primaryTextTheme.display3,
+            textAlign: TextAlign.center),
       ),
       Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20.0),
-          child: ButtonPlanet('Select Image!', _showChoiceDialog)),
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        child: Icon(FontAwesomeIcons.child, color: AppColor.yellow, size: 180),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        child: ButtonPlanet('Select Image!', _showChoiceDialog),
+      ),
     ];
   }
 
