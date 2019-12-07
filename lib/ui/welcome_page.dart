@@ -1,31 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:nice_button/nice_button.dart';
 import 'package:planet_cleaner/ui/action.dart';
+import 'package:planet_cleaner/ui/widgets/button_planet.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
-class MainPage extends StatefulWidget {
+class WelcomePage extends StatefulWidget {
   @override
-  _MainPageState createState() => _MainPageState();
+  _WelcomePageState createState() => _WelcomePageState();
 }
 
-class _MainPageState extends State<MainPage> {
-  void navigateToActionPage() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => ActionPage()));
-  }
-
+class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
-
-    var firstColor = Colors.lightBlueAccent, secondColor = Colors.lightGreen;
-
     return Scaffold(
       backgroundColor: AppColor.lightBlue,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.only(top: 60.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               CircleAvatar(
                 backgroundColor: Colors.white,
@@ -51,16 +43,14 @@ class _MainPageState extends State<MainPage> {
                 style: Theme.of(context).primaryTextTheme.display3,
                 textAlign: TextAlign.center,
               ),
-              NiceButton(
-                radius: 30,
-                padding: const EdgeInsets.all(15),
-                text: "Yes!",
-                background: AppColor.white,
-                gradientColors: [firstColor, secondColor],
-                onPressed: (){
-                  navigateToActionPage();
-                },
-              ),
+              ButtonPlanet(
+                'Yes',
+                () => Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const ActionPage(),
+                  ),
+                ),
+              )
             ],
           ),
         ),

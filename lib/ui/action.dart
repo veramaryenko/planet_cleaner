@@ -3,8 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:planet_cleaner/ui/camera/gallery_and_camera.dart';
 import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
 
+@immutable
 class ActionPage extends StatefulWidget {
-  ActionPage({Key key}) : super(key: key);
+  const ActionPage({Key key}) : super(key: key);
 
   @override
   ActionPageState createState() => ActionPageState();
@@ -12,12 +13,17 @@ class ActionPage extends StatefulWidget {
 
 class ActionPageState extends State<ActionPage> {
   int selectedIndex = 1;
-
   final widgetOptions = [
-    new TypesOfPollution(),
-    new CameraTestWidget(),
-    Text('Latest Posts'),
+    TypesOfPollution(),
+    CameraTestWidget(),
+    const Text('Latest Posts'),
   ];
+
+  void onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +56,5 @@ class ActionPageState extends State<ActionPage> {
         onTap: onItemTapped,
       ),
     );
-  }
-
-  void onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
   }
 }
