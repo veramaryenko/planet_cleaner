@@ -13,6 +13,9 @@ class PlanetCleanerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            color: AppColor.darkGreen,
+          ),
           backgroundColor: AppColor.lightBlue,
           primaryColor: Colors.blue,
           accentColor: Colors.lightBlueAccent,
