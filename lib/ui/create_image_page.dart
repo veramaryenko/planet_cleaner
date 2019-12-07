@@ -5,18 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:nice_button/nice_button.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'widgets/button_planet.dart';
 
-class CameraWidget extends StatefulWidget {
+class CreateImageView extends StatefulWidget {
   @override
-  _CameraWidgetState createState() => _CameraWidgetState();
+  _CreateImageViewState createState() => _CreateImageViewState();
 }
 
-class _CameraWidgetState extends State<CameraWidget> {
+class _CreateImageViewState extends State<CreateImageView> {
   final TextEditingController hashTagController = TextEditingController();
   File imageFile;
 
@@ -35,25 +34,23 @@ class _CameraWidgetState extends State<CameraWidget> {
     _currentItemSelected = _pollutions[2];
   }
 
-  Future<void> _openGallery(BuildContext context) async {
+  Future<void> _takePictureFromGallery() async {
     final File picture =
         await ImagePicker.pickImage(source: ImageSource.gallery);
     setState(() {
       imageFile = picture;
     });
-    Navigator.of(context).pop();
   }
 
-  Future<void> _openCamera(BuildContext context) async {
+  Future<void> _takePictureWithCamera() async {
     try {
       final File picture =
           await ImagePicker.pickImage(source: ImageSource.camera);
       setState(() {
         imageFile = picture;
-        Navigator.of(context).pop();
       });
     } on PlatformException catch (e) {
-      debugPrint('camera is busy, ignoring request');
+      debugPrint('camera is busy, ignoring request: $e');
     }
   }
 
@@ -69,14 +66,16 @@ class _CameraWidgetState extends State<CameraWidget> {
                   GestureDetector(
                     child: const Text('Gallery'),
                     onTap: () {
-                      _openGallery(context);
+                      _takePictureFromGallery();
+                      Navigator.of(context).pop();
                     },
                   ),
                   const Padding(padding: EdgeInsets.all(8.0)),
                   GestureDetector(
                     child: const Text('Camera'),
                     onTap: () {
-                      _openCamera(context);
+                      _takePictureWithCamera();
+                      Navigator.of(context).pop();
                     },
                   )
                 ],
@@ -107,69 +106,86 @@ class _CameraWidgetState extends State<CameraWidget> {
 
   List<Widget> sendRequestView() {
     return [
-      Image.file(
-        imageFile,
-        width: 300,
-        height: 200,
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
+        child: Image.file(
+          imageFile,
+          width: 300,
+          height: 200,
+        ),
       ),
       Form(
         key: _formKey,
-        child: ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 1.0),
+        child: Column(
           children: <Widget>[
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
               child: TextFormField(
                 controller: hashTagController,
-                style: Theme.of(context).primaryTextTheme.display2,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  prefixIcon: Icon(FontAwesomeIcons.hashtag),
+                  prefixIcon: Icon(
+                    FontAwesomeIcons.hashtag,
+                    color: AppColor.yellow,
+                  ),
                   hintText: 'Enter hashtags',
+                  hintStyle: TextStyle(color: AppColor.darkGreen),
                   labelText: 'Hashtags',
+                  labelStyle: TextStyle(color: AppColor.darkGreen),
                 ),
-                cursorColor: AppColor.white,
+                cursorColor: AppColor.yellow,
                 keyboardType: TextInputType.text,
+                style: TextStyle(color: AppColor.white),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(40.0),
-              child: DropdownButton<String>(
-                isExpanded: true,
-                isDense: true,
-                underline: const SizedBox(),
-                items: _pollutions.map((String dropDownStringItem) {
-                  return DropdownMenuItem<String>(
-                    value: dropDownStringItem,
-                    child: Text(dropDownStringItem),
-                  );
-                }).toList(),
-                onChanged: (String newValueSelected) {
-                  setState(() {
-                    _currentItemSelected = newValueSelected;
-                  });
-                },
-                value: _currentItemSelected,
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  canvasColor: AppColor.darkGreen,
+                ),
+                child: DropdownButton<String>(
+                  iconSize: 40,
+                  isExpanded: true,
+                  isDense: true,
+                  underline: const SizedBox(),
+                  iconEnabledColor: AppColor.yellow,
+                  items: _pollutions.map((String dropDownStringItem) {
+                    return DropdownMenuItem<String>(
+                      value: dropDownStringItem,
+                      child: Text(
+                        dropDownStringItem,
+                        style: Theme.of(context).primaryTextTheme.display2,
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String newValueSelected) {
+                    setState(() {
+                      _currentItemSelected = newValueSelected;
+                    });
+                  },
+                  value: _currentItemSelected,
+                ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: ButtonPlanet(
+                'Send',
+                () {
+                  print('${hashTagController.text} and $_currentItemSelected');
+                  setState(() {
+                    //TODO implement sending to instagram
+                    imageFile = null;
+                    hashTagController.text = '';
+                  });
+                  sendRequest();
+                },
+              ),
+            )
           ],
         ),
-      ),
-      NiceButton(
-        radius: 20,
-        padding: const EdgeInsets.all(15),
-        text: 'Send',
-        background: AppColor.white,
-        gradientColors: [Colors.lightBlueAccent, Colors.lightGreen],
-        onPressed: () {
-          print('${hashTagController.text} and $_currentItemSelected');
-          setState(() {
-            imageFile = null;
-          });
-          //TODO implement sending to instagram
-        },
       ),
     ];
   }
@@ -177,13 +193,13 @@ class _CameraWidgetState extends State<CameraWidget> {
   void sendRequest() {
     Firestore.instance
         .collection('tasks')
-        .add({"title": "title", "description": "description"})
+        .add({'title': 'title', 'description': 'description'})
         .then((result) => {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
-                  content: const Text("Thank you for sending the request! "),
-                  backgroundColor: Colors.lightGreen,
-                  duration: Duration(seconds: 5),
+                  content: const Text('Thank you for sending the request!'),
+                  backgroundColor: AppColor.yellow,
+                  duration: Duration(seconds: 3),
                 ),
               )
             })

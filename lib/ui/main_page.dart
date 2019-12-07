@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:planet_cleaner/ui/gallery_and_camera.dart';
+import 'package:planet_cleaner/ui/create_image_page.dart';
 import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
@@ -15,8 +15,8 @@ class MainPageView extends StatefulWidget {
 class MainPageViewState extends State<MainPageView> {
   int selectedIndex = 1;
   final List<Widget> widgetOptions = [
-    TypesOfPollution(),
-    CameraWidget(),
+    const TypesOfPollution(),
+    CreateImageView(),
     const Text('Latest Posts'),
   ];
   @override
