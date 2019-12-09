@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:planet_cleaner/ui/main_page.dart';
+import 'package:planet_cleaner/ui/welcome_page.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,17 +11,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    startTimeout();
     super.initState();
+    _navigateToMainPageAfterSeconds(sec: 3);
   }
 
   void navigateToMainPage() {
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => MainPage()));
+        MaterialPageRoute(builder: (BuildContext context) => WelcomePage()));
   }
 
-  Future<Timer> startTimeout() async {
-    return Timer(const Duration(seconds: 3), navigateToMainPage);
+  Future<Timer> _navigateToMainPageAfterSeconds({int sec}) async {
+    return Timer(Duration(seconds: sec), navigateToMainPage);
   }
 
   @override
@@ -54,9 +54,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     CircularProgressIndicator(backgroundColor: AppColor.yellow),
               ),
               Text(
-                'Make Planet\nClean and Beautiful',
+                'Make Planet Clean and Beautiful',
                 textAlign: TextAlign.center,
-                 ,
+                style: Theme.of(context).primaryTextTheme.display3,
               )
             ],
           ),
