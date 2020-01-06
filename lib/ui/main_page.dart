@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:planet_cleaner/ui/create_image_page.dart';
-import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
+import 'package:planet_cleaner/ui/maps.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
+import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
 
 @immutable
 class MainPageView extends StatefulWidget {
@@ -17,7 +18,8 @@ class MainPageViewState extends State<MainPageView> {
   final List<Widget> widgetOptions = [
     const TypesOfPollution(),
     CreateImageView(),
-    const Text('Latest Posts'),
+    MyApp(),
+   // const Text('Latest Posts'),
   ];
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,7 @@ class MainPageViewState extends State<MainPageView> {
           BottomNavigationBarItem(
             icon:
                 Icon(Icons.supervised_user_circle, color: AppColor.lightGreen),
-            title: const Text('Latest Posts'),
+            title: const Text('Maps'),
           ),
         ],
         currentIndex: selectedIndex,
