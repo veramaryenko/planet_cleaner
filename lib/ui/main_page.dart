@@ -18,7 +18,7 @@ class MainPageViewState extends State<MainPageView> {
   final List<Widget> widgetOptions = [
     const TypesOfPollution(),
     CreateImageView(),
-    MyApp(),
+    MapClass(),
    // const Text('Latest Posts'),
   ];
   @override
@@ -41,12 +41,12 @@ class MainPageViewState extends State<MainPageView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_a_photo, color: AppColor.lightGreen),
-            title: const Text('Send request'),
+            title: const Text('Mark pollution'),
           ),
           BottomNavigationBarItem(
             icon:
-                Icon(Icons.supervised_user_circle, color: AppColor.lightGreen),
-            title: const Text('Maps'),
+                Icon(Icons.add_location, color: AppColor.lightGreen),
+            title: const Text('Map of pollutans'),
           ),
         ],
         currentIndex: selectedIndex,

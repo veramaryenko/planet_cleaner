@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planet_cleaner/ui/maps.dart';
 import 'package:planet_cleaner/ui/welcome_page.dart';
 import 'package:planet_cleaner/ui/splash_page.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
@@ -47,6 +48,7 @@ class PlanetCleanerApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           'WelcomeUserSceen': (BuildContext context) => WelcomePage(),
           'CameraScreen': (BuildContext context) => MainPageView(),
+          'MapScreen': (BuildContext context) => MapClass(),
         });
   }
 }
