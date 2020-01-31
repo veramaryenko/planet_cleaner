@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:planet_cleaner/ui/main_page.dart';
 import 'package:planet_cleaner/ui/widgets/button_planet.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
@@ -44,13 +43,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 textAlign: TextAlign.center,
               ),
               ButtonPlanet(
-                'Yes',
-                () => Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => const MainPageView(),
-                  ),
-                ),
-              )
+                  'Yes',
+                  () =>
+                      Navigator.pushReplacementNamed(context, 'MainViewScreen'))
             ],
           ),
         ),

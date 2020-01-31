@@ -18,15 +18,18 @@ class MainPageViewState extends State<MainPageView> {
   final List<Widget> widgetOptions = [
     const TypesOfPollution(),
     CreateImageView(),
-    MapClass(),
-   // const Text('Latest Posts'),
+    MapView(),
+    // const Text('Latest Posts'),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planet Cleaner',
-            style: Theme.of(context).primaryTextTheme.display1),
+        title: Text(
+          'Planet Cleaner',
+          style: Theme.of(context).primaryTextTheme.display1,
+        ),
       ),
       body: Center(
         child: widgetOptions.elementAt(selectedIndex),
@@ -44,8 +47,7 @@ class MainPageViewState extends State<MainPageView> {
             title: const Text('Mark pollution'),
           ),
           BottomNavigationBarItem(
-            icon:
-                Icon(Icons.add_location, color: AppColor.lightGreen),
+            icon: Icon(Icons.add_location, color: AppColor.lightGreen),
             title: const Text('Map of pollutans'),
           ),
         ],
