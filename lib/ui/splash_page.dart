@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:planet_cleaner/ui/welcome_page.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,8 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToMainPage() {
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (BuildContext context) => WelcomePage()));
+    Navigator.pushReplacementNamed(context, 'WelcomeUserSceen');
   }
 
   Future<Timer> _navigateToMainPageAfterSeconds({int sec}) async {
@@ -65,5 +63,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-
