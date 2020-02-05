@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "32821108146",
-    "firebase_url": "https://planet-cleaner.firebaseio.com",
-    "project_id": "planet-cleaner",
-    "storage_bucket": "planet-cleaner.appspot.com"
+    "project_number": "840821951991",
+    "firebase_url": "https://planet-cleaner-db.firebaseio.com",
+    "project_id": "planet-cleaner-db",
+    "storage_bucket": "planet-cleaner-db.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:32821108146:android:03a4af479d3372f19258ab",
+        "mobilesdk_app_id": "1:840821951991:android:ff59875eb0c8fa9b6532f2",
         "android_client_info": {
           "package_name": "veramaryenko.planet_cleaner"
         }
       },
       "oauth_client": [
         {
-          "client_id": "32821108146-pta8mbj7olef3u1bk07dondilij18spd.apps.googleusercontent.com",
+          "client_id": "840821951991-bmsog6s4katv8g613trtppulgpdn127g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDxfYqM6zMHFoe9ctqjBCCH37Ir5ABoonQ"
+          "current_key": "AIzaSyAbhnhcUXcqwpJ5q80pc_CFRUYGVPqVZVw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "32821108146-pta8mbj7olef3u1bk07dondilij18spd.apps.googleusercontent.com",
+              "client_id": "840821951991-bmsog6s4katv8g613trtppulgpdn127g.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -1,12 +1,15 @@
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:planet_cleaner/bloc/backend_bloc.dart';
+import 'package:planet_cleaner/bloc/camera_bloc.dart';
+import 'package:planet_cleaner/bloc/map_bloc.dart';
+import 'package:planet_cleaner/datamodels/pollution_report_model.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/button_planet.dart';
 
@@ -16,8 +19,11 @@ class CreateImageView extends StatefulWidget {
 }
 
 class _CreateImageViewState extends State<CreateImageView> {
+  IBackendBloc backendBloc;
   final TextEditingController hashTagController = TextEditingController();
   File imageFile;
+  IMapBloc mapBloc;
+  IPhotoBloc photoBloc;
 
   String _currentItemSelected;
   final _formKey = GlobalKey<FormState>();
@@ -34,26 +40,6 @@ class _CreateImageViewState extends State<CreateImageView> {
     _currentItemSelected = _pollutions[2];
   }
 
-  Future<void> _takePictureFromGallery() async {
-    final File picture =
-        await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      imageFile = picture;
-    });
-  }
-
-  Future<void> _takePictureWithCamera() async {
-    try {
-      final File picture =
-          await ImagePicker.pickImage(source: ImageSource.camera);
-      setState(() {
-        imageFile = picture;
-      });
-    } on PlatformException catch (e) {
-      debugPrint('camera is busy, ignoring request: $e');
-    }
-  }
-
   void _showChoiceDialog() {
     showDialog(
         context: context,
@@ -66,7 +52,13 @@ class _CreateImageViewState extends State<CreateImageView> {
                   GestureDetector(
                     child: const Text('Gallery'),
                     onTap: () {
-                      _takePictureFromGallery();
+                      photoBloc
+                          .getPictureFromGallery()
+                          .then((File returnedPic) {
+                        setState(() {
+                          imageFile = returnedPic;
+                        });
+                      });
                       Navigator.of(context).pop();
                     },
                   ),
@@ -74,7 +66,11 @@ class _CreateImageViewState extends State<CreateImageView> {
                   GestureDetector(
                     child: const Text('Camera'),
                     onTap: () {
-                      _takePictureWithCamera();
+                      photoBloc.getPictureFromCamera().then((File returnedPic) {
+                        setState(() {
+                          imageFile = returnedPic;
+                        });
+                      });
                       Navigator.of(context).pop();
                     },
                   )
@@ -173,14 +169,35 @@ class _CreateImageViewState extends State<CreateImageView> {
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: ButtonPlanet(
                 'Send',
-                () {
+                () async {
+                  final repPollut = PollutionReportModel(
+                    _currentItemSelected,
+                    hashTagController.text,
+                    imageFile,
+                    await mapBloc.getCurrentUserPosition(),
+                  );
+
                   print('${hashTagController.text} and $_currentItemSelected');
+
                   setState(() {
-                    //TODO implement sending to instagram
+                    // TODO(vera): implement sending to instagram
                     imageFile = null;
                     hashTagController.text = '';
                   });
-                  sendRequest();
+
+                  if (await backendBloc.sendPhotoWithDataToBackend(repPollut)) {
+                    mapBloc.addNewPolutionMarker(repPollut);
+                    Scaffold.of(context).showSnackBar(
+                      SnackBar(
+                        content:
+                            const Text('Thank you for sending the request!'),
+                        backgroundColor: AppColor.yellow,
+                        duration: Duration(seconds: 3),
+                      ),
+                    );
+                  } else {
+                    print('Failed sending request!');
+                  }
                 },
               ),
             )
@@ -190,30 +207,18 @@ class _CreateImageViewState extends State<CreateImageView> {
     ];
   }
 
-  void sendRequest() {
-    Firestore.instance
-        .collection('tasks')
-        .add({'title': 'title', 'description': 'description'})
-        .then((result) => {
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: const Text('Thank you for sending the request!'),
-                  backgroundColor: AppColor.yellow,
-                  duration: Duration(seconds: 3),
-                ),
-              )
-            })
-        .catchError((err) => print(err));
-  }
-
   @override
   Widget build(BuildContext context) {
+    photoBloc = Provider.of<IPhotoBloc>(context);
+    backendBloc = Provider.of<IBackendBloc>(context);
+    mapBloc = Provider.of<IMapBloc>(context);
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: imageFile == null ? makePhotoView() : sendRequestView(),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            children: imageFile == null ? makePhotoView() : sendRequestView(),
+          ),
         ),
       ),
     );

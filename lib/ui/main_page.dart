@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:planet_cleaner/ui/create_image_page.dart';
-import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
+import 'package:planet_cleaner/ui/maps.dart';
 import 'package:planet_cleaner/utils/app_color.dart';
+import 'package:planet_cleaner/ui/types_of_poll_swiper.dart';
 
 @immutable
 class MainPageView extends StatefulWidget {
@@ -17,14 +18,18 @@ class MainPageViewState extends State<MainPageView> {
   final List<Widget> widgetOptions = [
     const TypesOfPollution(),
     CreateImageView(),
-    const Text('Latest Posts'),
+    MapView(),
+    // const Text('Latest Posts'),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planet Cleaner',
-            style: Theme.of(context).primaryTextTheme.display1),
+        title: Text(
+          'Planet Cleaner',
+          style: Theme.of(context).primaryTextTheme.display1,
+        ),
       ),
       body: Center(
         child: widgetOptions.elementAt(selectedIndex),
@@ -39,12 +44,11 @@ class MainPageViewState extends State<MainPageView> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_a_photo, color: AppColor.lightGreen),
-            title: const Text('Send request'),
+            title: const Text('Mark pollution'),
           ),
           BottomNavigationBarItem(
-            icon:
-                Icon(Icons.supervised_user_circle, color: AppColor.lightGreen),
-            title: const Text('Latest Posts'),
+            icon: Icon(Icons.add_location, color: AppColor.lightGreen),
+            title: const Text('Map of pollutans'),
           ),
         ],
         currentIndex: selectedIndex,

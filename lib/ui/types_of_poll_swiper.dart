@@ -15,7 +15,8 @@ class TypesOfPollutionState extends State<TypesOfPollution> {
       backgroundColor: Theme.of(context).backgroundColor,
       body: Swiper(
         itemBuilder: (BuildContext context, int index) {
-          //TODO: add list of pollutions - create list of images/screens
+          // TODO(vera): add list of pollutions - create list of images/screens
+          // TODO(vera): Show the 5 latest added photos from Firebase with type polution
           return Image.network(
             'https://img-aws.ehowcdn.com/600x600p/photos.demandstudios.com/getty/article/184/54/72967776.jpg',
             fit: BoxFit.contain,
@@ -44,8 +45,8 @@ class TypesOfPollutionState extends State<TypesOfPollution> {
         customLayoutOption: CustomLayoutOption(startIndex: -1, stateCount: 3)
             .addRotate([-45.0 / 180, 0.0, 45 / 180]).addTranslate(
                 [Offset(-350.0, -35.0), Offset(0.0, 0.0), Offset(370.0, 40.0)]),
-        pagination: SwiperPagination(),
-        control: SwiperControl(),
+        pagination: const SwiperPagination(),
+        control: const SwiperControl(),
       ),
     );
   }
